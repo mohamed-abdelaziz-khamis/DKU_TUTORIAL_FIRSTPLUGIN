@@ -62,11 +62,17 @@ class MyConnector(Connector):
         Each yielded row must be a dictionary, indexed by column name.
 
         The dataset schema and partitioning are given for information purpose.
-        """
         for i in xrange(1,10):
             yield { "first_col" : str(i), "my_string" : "Yes" }
+        """
+        
+        beg_date_str = "%sT00:00:00Z" % partition_id
+        beg_date = dateutil.parser.parse(beg_date_str)
+        end_date = beg_date + datetime.timedelta(days=1)
+        end_date_str = end_date.strftime("%Y-%m-%dT%H:%M:%S.%fZ")
 
-
+        # Both beg_date_str and end_date_str are ISO8601-formatted timestamps
+        
     def get_writer(self, dataset_schema=None, dataset_partitioning=None,
                          partition_id=None):
         """
