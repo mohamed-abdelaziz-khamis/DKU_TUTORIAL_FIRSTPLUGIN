@@ -92,16 +92,12 @@ class MyConnector(Connector):
         for hit in res["hits"]:
             yield hit
 
+    # As for generate_rows, we receive here the partitioning and the partition
+    # id to write
     def get_writer(self, dataset_schema=None, dataset_partitioning=None,
-                         partition_id=None):
-        """
-        Returns a writer object to write in the dataset (or in a partition).
-
-        The dataset_schema given here will match the the rows given to the writer below.
-
-        Note: the writer is responsible for clearing the partition, if relevant.
-        """
-        raise Exception("Unimplemented")
+                       partition_id=None):
+          return AlgoliaSearchConnectorWriter(self.config, self._get_index(),
+                  dataset_schema, dataset_partitioning, partition_id)
 
 
     def get_partitioning(self):
