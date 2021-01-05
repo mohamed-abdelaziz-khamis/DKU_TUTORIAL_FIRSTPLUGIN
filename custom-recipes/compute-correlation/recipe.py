@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+import dataiku
+import pandas as pd, numpy as np
+
 # Retrieve array of dataset names from 'input' role, then create datasets
 input_names = get_input_names_for_role('input')
 input_datasets = [dataiku.Dataset(name) for name in input_names]
@@ -8,10 +12,6 @@ output_datasets = [dataiku.Dataset(name) for name in output_names]
 
 # Retrieve parameter values from the of map of parameters
 threshold = get_recipe_config()['threshold']
-
-# -*- coding: utf-8 -*-
-import dataiku
-import pandas as pd, numpy as np
 
 # Read the input
 input_dataset = input_datasets[0]
