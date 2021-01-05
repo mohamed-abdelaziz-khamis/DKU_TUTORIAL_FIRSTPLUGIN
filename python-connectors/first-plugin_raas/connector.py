@@ -62,9 +62,19 @@ class MyConnector(Connector):
         Each yielded row must be a dictionary, indexed by column name.
 
         The dataset schema and partitioning are given for information purpose.
-        """
+        
         for i in xrange(1,10):
             yield { "first_col" : str(i), "my_string" : "Yes" }
+        """    
+                    req = requests.get("http://raas.dataiku.com/api.php", params = {
+            "apiKey": self.key,
+            "nb":self.nb,
+            "max":self.max
+        })
+
+        array = req.json()
+        for random_number in array:
+            yield { "random"  : random_number}
 
 
     def get_writer(self, dataset_schema=None, dataset_partitioning=None,
