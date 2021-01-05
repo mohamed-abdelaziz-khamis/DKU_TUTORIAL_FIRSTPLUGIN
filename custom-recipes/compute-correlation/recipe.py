@@ -29,14 +29,12 @@ for i in range(0, len(column_names)):
            df[col2].dtype == "float64":
             pairs.append((col1, col2))
 
-# Compute the correlation for each pair, and write a
-# row in the output array
-output = []
 for pair in pairs:
     corr = df[[pair[0], pair[1]]].corr().iloc[0][1]
-    output.append({"col0" : pair[0],
-                   "col1" : pair[1],
-                   "corr" :  corr})
+    if np.abs(corr) > threshold:
+      output.append({"col0" : pair[0],
+                     "col1" : pair[1],
+                     "corr" :  corr})
 
 # Write the output to the output dataset
 output_dataset =  dataiku.Dataset("wine_correlation")
