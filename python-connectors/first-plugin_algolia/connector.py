@@ -111,10 +111,35 @@ class MyConnector(Connector):
         raise Exception("Unimplemented")
 
 
-    def list_partitions(self, partitioning):
-        """Return the list of partitions for the partitioning scheme
-        passed as parameter"""
-        return []
+    def list_partitions(self, dataset_partitioning):
+        assert dataset_partitioning is not None
+
+        # Ask Algolia to facet on the name of each dimension
+        facets = [dim["name"] for dim in dataset_partitioning["dimensions"]]
+        search_settings = {}
+        search_settings["facets"] = facets
+
+        # Perform the faceted search
+        index = self._get_index()
+        res = index.search("*", search_settings)
+
+        # Gather the various values of each dimension in a list of list
+        vals =[]
+        for dim in dataset_partitioning["dimensions"]:
+            facet = res["facets"][dim["name"]]
+            vals.append(facet.keys())
+
+        # Make the cartesian products of the lists of lists.
+        # For example, if we had [ [cat1, cat2], [author1, author2] ]
+        # in vals, we'll end up in ret with:
+        # ["cat1|author1", "cat1|author2", "cat2|author1", "cat2|author2"]
+
+        ret = []
+        import itertools
+        for element in itertools.product(*vals):
+            ret.append("|".join(element))
+        print ret
+        return ret
 
 
     def partition_exists(self, partitioning, partition_id):
