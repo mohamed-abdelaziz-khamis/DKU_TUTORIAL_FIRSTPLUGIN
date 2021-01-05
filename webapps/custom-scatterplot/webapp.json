@@ -73,6 +73,6 @@
         - targetParamsKey(s): name of the parameter(s) that will be filled with the selected object
     */
     "roles": [
-        /* {"type": "DATASET", "targetParamsKey": "input_dataset"} */
+         {"type": "DATASET", "targetParamsKey": "input_dataset"} 
     ]
 }
