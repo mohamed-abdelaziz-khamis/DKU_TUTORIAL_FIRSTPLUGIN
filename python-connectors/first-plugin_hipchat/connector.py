@@ -78,10 +78,18 @@ class MyConnector(Connector):
 
 
     def get_partitioning(self):
-        """
-        Return the partitioning schema that the connector defines.
-        """
-        raise Exception("Unimplemented")
+        return {
+            "dimensions": [
+                {
+                    "name" : "day",
+                    "type" : "time",
+                    "params" : {
+                        "period" : "DAY"
+                    }
+
+                }
+            ]
+        }
 
 
     def list_partitions(self, partitioning):
