@@ -37,5 +37,5 @@ for pair in pairs:
                      "corr" :  corr})
 
 # Write the output to the output dataset
-output_dataset =  dataiku.Dataset("wine_correlation")
+output_dataset =  output_datasets[0]
 output_dataset.write_with_schema(pd.DataFrame(output))
