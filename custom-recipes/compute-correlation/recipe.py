@@ -1,6 +1,7 @@
-# -*- coding: utf-8 -*-
-from dataiku.customrecipe import *
+# import the classes for accessing DSS objects from the recipe
 import dataiku
+# Import the helpers for custom recipes
+from dataiku.customrecipe import *
 import pandas as pd, numpy as np
 
 # Retrieve array of dataset names from 'input' role, then create datasets
