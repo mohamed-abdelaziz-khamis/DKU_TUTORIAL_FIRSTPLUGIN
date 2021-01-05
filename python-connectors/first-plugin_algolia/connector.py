@@ -169,3 +169,41 @@ class CustomDatasetWriter(object):
 
     def close(self):
         pass
+
+class AlgoliaSearchConnectorWriter(CustomDatasetWriter):
+    def __init__(self, config, index, dataset_schema, dataset_partitioning, partition_id):
+        CustomDatasetWriter.__init__(self)
+        self.config = config
+        self.index = index
+        self.dataset_schema = dataset_schema
+        self.dataset_partitioning = dataset_partitioning
+        self.partition_id = partition_id
+
+        if self.dataset_partitioning is not None:
+            # If we are partitioned, clear by query
+        else:
+            # Clear all
+            self.index.clear_index()
+
+    def write_row(self, row):
+        obj = {}
+
+        # We generate the "regular" row with the content of the row
+        for (col, val) in zip(self.dataset_schema["columns"], row):
+            obj[col["name"]] = val
+
+        # We add or overwrite partitioning columns with the actual
+        # value sof the dimension
+        if self.dataset_partitioning is not None:
+            id_chunks = self.partition_id.split("|")
+            idx = 0
+
+            for dim in self.dataset_partitioning["dimensions"]:
+                obj[dim["name"]] = id_chunks[idx]
+                idx += 1
+
+        logging.info("Final obj: %s" % obj)
+
+        # Send to Algolia
+        self.index.save_object(obj)
+        self.buffer = []    
