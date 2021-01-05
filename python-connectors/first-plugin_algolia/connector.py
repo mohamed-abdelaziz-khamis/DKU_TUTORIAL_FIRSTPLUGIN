@@ -59,11 +59,38 @@ class MyConnector(Connector):
         Returns a generator over the rows of the dataset (or partition)
         Each yielded row must be a dictionary, indexed by column name.
 
-        The dataset schema and partitioning are given for information purpose.
-        """
+        The dataset schema and partitioning are given for information purpose.        
         for i in xrange(1,10):
             yield { "first_col" : str(i), "my_string" : "Yes" }
+        """
+        
+        # Get a handle on the Algolia index
+        index = self._get_index()
 
+        search_settings = {}
+
+        if dataset_partitioning is not None:
+            facetFilters = []
+            idx = 0
+
+            # Split the partition identifiers by dimension
+            id_chunks = partition_id.split("|")
+
+            for dim in dataset_partitioning["dimensions"]:
+
+                # For each dimension, define a facet filter in the form
+                # dimension_name:value
+                facetFilters.append(dim["name"] + ":" + id_chunks[idx])
+                idx += 1
+
+            search_settings["facetFilters"] = ",".join(facetFilters)
+
+        print "Final settings : %s" % search_settings
+
+        res = index.search("*", search_settings)
+
+        for hit in res["hits"]:
+            yield hit
 
     def get_writer(self, dataset_schema=None, dataset_partitioning=None,
                          partition_id=None):
