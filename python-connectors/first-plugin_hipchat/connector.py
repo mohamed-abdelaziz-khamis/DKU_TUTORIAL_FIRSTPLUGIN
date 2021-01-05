@@ -3,6 +3,8 @@
 # import the base class for the custom dataset
 from six.moves import xrange
 from dataiku.connector import Connector
+import dateutil.parser
+import datetime
 
 """
 A custom Python dataset is a subclass of Connector.
