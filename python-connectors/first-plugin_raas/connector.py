@@ -51,7 +51,7 @@ class MyConnector(Connector):
 
         # In this example, we don't specify a schema here, so DSS will infer the schema
         # from the columns actually returned by the generate_rows method
-        return None
+        return {"columns" : [{ "name" : "random", "type" : "int" }]}
 
     def generate_rows(self, dataset_schema=None, dataset_partitioning=None,
                             partition_id=None, records_limit = -1):
