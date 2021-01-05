@@ -13,11 +13,12 @@ import dataiku
 import pandas as pd
 
 # Parameterize web app inputs
-input_dataset = "Orders_enriched_prepared"
-x_column = "age" 
-y_column = "total"
-time_column = "order_date_year"
-cat_column = "tshirt_category"
+# Retrieve parameter values from the of map of parameters
+input_dataset = get_webapp_config()['input_dataset']
+x_column = get_webapp_config()['x_column']
+y_column = get_webapp_config()['y_column']
+time_column = get_webapp_config()['time_column']
+cat_column = get_webapp_config()['cat_column']
 
 # Set up data
 mydataset = dataiku.Dataset(input_dataset)
