@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from dataiku.customrecipe import *
 import dataiku
 import pandas as pd, numpy as np
 
