@@ -15,7 +15,7 @@
     "readable": true,
     /* Can this connector write data ? */
     "writable": false,
-
+    "partitioningMode" : "USER_DEFINED_LISTABLE",
 
     /* params:
     DSS will generate a formular from this list of requested parameters.
