@@ -15,7 +15,7 @@
     "readable": true,
     /* Can this connector write data ? */
     "writable": false,
-    "partitioningMode" : "CODE_DEFINED_UNLISTABLE"
+    "partitioningMode" : "CODE_DEFINED_UNLISTABLE",
 
     /* params:
     DSS will generate a formular from this list of requested parameters.
