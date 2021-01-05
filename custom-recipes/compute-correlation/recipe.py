@@ -14,7 +14,7 @@ import dataiku
 import pandas as pd, numpy as np
 
 # Read the input
-input_dataset = dataiku.Dataset("wine_quality")
+input_dataset = input_datasets[0]
 df = input_dataset.get_dataframe()
 column_names = df.columns
 
