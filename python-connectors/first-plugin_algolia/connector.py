@@ -95,7 +95,8 @@ class MyConnector(Connector):
     # As for generate_rows, we receive here the partitioning and the partition
     # id to write
     def get_writer(self, dataset_schema=None, dataset_partitioning=None, partition_id=None):
-          return AlgoliaSearchConnectorWriter(self.config, self._get_index(),
+          
+        return AlgoliaSearchConnectorWriter(self.config, self._get_index(),
                   dataset_schema, dataset_partitioning, partition_id)
 
 
