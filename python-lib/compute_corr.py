@@ -1,3 +1,5 @@
+import pandas as pd, numpy as np
+
 def compute_pairs(df):
     # We'll only compute correlations on numerical columns
     # So extract all pairs of names of numerical columns
