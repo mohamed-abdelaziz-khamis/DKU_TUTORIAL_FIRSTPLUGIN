@@ -21,3 +21,4 @@ def compute_corr(df,threshold):
           output.append({"col0" : pair[0],
                          "col1" : pair[1],
                          "corr" :  corr})
+    return output    
