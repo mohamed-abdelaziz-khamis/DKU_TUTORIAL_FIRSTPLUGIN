@@ -2,7 +2,6 @@
 import dataiku
 # Import the helpers for custom recipes
 from dataiku.customrecipe import *
-import pandas as pd, numpy as np
 
 # Retrieve array of dataset names from 'input' role, then create datasets
 input_names = get_input_names_for_role('input')
@@ -19,8 +18,6 @@ threshold = get_recipe_config()['threshold']
 input_dataset = input_datasets[0]
 df = input_dataset.get_dataframe()
 column_names = df.columns
-
-
 
 # Write the output to the output dataset
 output_dataset =  output_datasets[0]
