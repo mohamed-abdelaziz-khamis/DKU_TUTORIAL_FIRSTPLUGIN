@@ -9,6 +9,7 @@ def compute_pairs(df):
             if df[col1].dtype == "float64" and \
                df[col2].dtype == "float64":
                 pairs.append((col1, col2))
+    return pairs
 
 def compute_corr(df,threshold):                
     # Compute the correlation for each pair, and write a
