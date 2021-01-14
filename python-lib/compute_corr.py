@@ -10,12 +10,13 @@ def compute_pairs(df):
                df[col2].dtype == "float64":
                 pairs.append((col1, col2))
 
-# Compute the correlation for each pair, and write a
-# row in the output array
-output = []            
-for pair in pairs:
-    corr = df[[pair[0], pair[1]]].corr().iloc[0][1]
-    if np.abs(corr) > threshold:
-      output.append({"col0" : pair[0],
-                     "col1" : pair[1],
-                     "corr" :  corr})
+def compute_corr(df,threshold):                
+    # Compute the correlation for each pair, and write a
+    # row in the output array
+    output = []            
+    for pair in pairs:
+        corr = df[[pair[0], pair[1]]].corr().iloc[0][1]
+        if np.abs(corr) > threshold:
+          output.append({"col0" : pair[0],
+                         "col1" : pair[1],
+                         "corr" :  corr})
