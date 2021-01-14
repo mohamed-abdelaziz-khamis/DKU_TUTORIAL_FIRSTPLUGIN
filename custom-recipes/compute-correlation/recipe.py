@@ -1,3 +1,5 @@
+from compute_corr import *
+
 # import the classes for accessing DSS objects from the recipe
 import dataiku
 # Import the helpers for custom recipes
