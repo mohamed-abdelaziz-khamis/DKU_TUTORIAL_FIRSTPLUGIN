@@ -1,4 +1,4 @@
-def compute_pairs()
+def compute_pairs(df):
     # We'll only compute correlations on numerical columns
     # So extract all pairs of names of numerical columns
     pairs = []
