@@ -4,6 +4,7 @@ from compute_corr import *
 import dataiku
 # Import the helpers for custom recipes
 from dataiku.customrecipe import *
+import pandas as pd, numpy as np
 
 # Retrieve array of dataset names from 'input' role, then create datasets
 input_names = get_input_names_for_role('input')
